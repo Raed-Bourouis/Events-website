@@ -1,6 +1,7 @@
 const port = 8000 //localhost port
 
 //importing modules
+const eventSchema=require("./models/event")
 const mongoose=require("mongoose");
 const express=require("express");
 const morgan = require("morgan");
@@ -12,8 +13,19 @@ app.use(express.json())
 app.use(morgan("dev"));
 app.use(cors("*"))
 
+//testing post --ignore this
+// let ev={
+//     title: "Concert Night",
+//     artist: "The Band",
+//     start: new Date('2024-06-01T19:00:00Z'),
+//     end: new Date('2024-06-01T22:00:00Z')
+// }
 
+// app.post('/events', async (req,res)=>{
+//     await eventSchema.create(req.body)
+//     res.status(200).json({message:"created"})
 
+// })
 
 connectDb = async () => {
     try {
