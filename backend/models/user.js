@@ -22,14 +22,14 @@ let userSchema = mongoose.Schema({
         required:true,
         default:[]
     },
+    phone:{
+        type:String,
+        required:true
+    },
     isAdmin:{
         type:Boolean,
         required:true,
         default:false
-    },
-    over:{
-        type:Boolean,
-        default: this.End<Date.now()
     }
 })
 

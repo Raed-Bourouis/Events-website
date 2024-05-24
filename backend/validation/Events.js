@@ -12,7 +12,6 @@ const eventsValidation=joi.object({
      end : joi.date().required(),
      image: joi.string().required(),
      artist: joi.string().required(),
-     // date: joi.date().iso().required(),
      location: joi.string().required(),
      salle: joi.string().required(),
      ticketsNumber: joi.number().required(),

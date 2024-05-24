@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(morgan("dev"));
 app.use(cors("*"))
 app.use('/events',eventRouter)
-app.use('/client',clientRouter)
+app.use('/users',clientRouter)
 
 //testing post --ignore this
 // let ev={
