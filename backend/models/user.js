@@ -5,8 +5,16 @@ let userSchema = mongoose.Schema({
         type:String,
         required:true
     },
+     family_name:{
+        type:String,
+        required:true
+    },
     email:{
         type:String,
+        required:true
+    },
+    password:{
+        type:string,
         required:true
     },
     reservations:{
