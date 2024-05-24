@@ -14,7 +14,7 @@ let userSchema = mongoose.Schema({
         required:true
     },
     password:{
-        type:string,
+        type:String,
         required:true
     },
     reservations:{

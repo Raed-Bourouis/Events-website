@@ -1,6 +1,5 @@
-const eventsValidation=require("../validation/Events");
-const eventSchema=require("../models/eventSchema");
-const { func } = require("joi");
+// const eventsValidation=require("../validation/Events");
+const eventSchema=require("../models/event");
 //createEvent getallevent getonevent delete put
 
 
@@ -31,10 +30,10 @@ let getOneeEvent=async(req,res)=>{
 
 let createEvent=async (req,res)=>{
     //validation part 
-    let {error,value } = eventsValidation.validate(req.body);
-    if (error){
-        return res.status(400).json({message : error.details[0].message})
-    }
+    // let {error,value } = eventsValidation.validate(req.body);
+    // if (error){
+    //     return res.status(400).json({message : error.details[0].message})
+    // }
     //adding event
     try{
         let newevent = await eventSchema.create(req.body)
@@ -58,13 +57,13 @@ let deleteEvent = async (req,res)=>{
 }
 let updateEvent= async (req,res) => {
     const eventId =req.params.id;
-    let {error, value}= eventsValidation.validate(req.body)
-    if (error){
-    return res.status(400).json({message : error.details[0].message})
-    }
+    // let {error, value}= eventsValidation.validate(req.body)
+    // if (error){
+    // return res.status(400).json({message : error.details[0].message})
+    // }
     try{
-        let event= await eventSchema.findByIdAndUpdate(eventId,value,{new:true,old:false});
-        res.status(200).json({message:"updated successfully"})
+        let event= await eventSchema.findByIdAndUpdate(eventId,req.body,{new:true,old:false});
+        res.status(200).json({message:"updated successfully, created event"+event})
         
     }
     catch(e){

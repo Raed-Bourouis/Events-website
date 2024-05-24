@@ -6,8 +6,16 @@ const express=require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 
+//importing routers
+const eventRouter=require("./routers/Event")
+const clientRouter=require("./routers/Client")
+
+
+
 //app creation and middlewares
 const app=express()
+app.use('/events',eventRouter)
+app.use('/client',clientRouter)
 app.use(express.json())
 app.use(morgan("dev"));
 app.use(cors("*"))

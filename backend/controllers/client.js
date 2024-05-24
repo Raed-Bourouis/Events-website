@@ -1,6 +1,5 @@
 const clientValidation=require("../validation/Client");
-const eventSchema=require("../models/clientSchema");
-const { func } = require("joi");
+const clientSchema=require("../models/user");
 //createEvent getallevent getonevent delete put
 
 
