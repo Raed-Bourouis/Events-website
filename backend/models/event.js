@@ -14,7 +14,7 @@ let eventSchema = mongoose.Schema({
         required:true
     },
     image:{
-        type:string,
+        type:String,
         required:true
     },
     start:{

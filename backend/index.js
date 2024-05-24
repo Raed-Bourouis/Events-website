@@ -1,7 +1,6 @@
 const port = 8000 //localhost port
 
 //importing modules
-const eventSchema=require("./models/event")
 const mongoose=require("mongoose");
 const express=require("express");
 const morgan = require("morgan");
