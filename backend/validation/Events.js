@@ -8,6 +8,8 @@ const eventsValidation=joi.object({
      .min(20)
      .max(50)
      .required(),
+     start : joi.date().required(),
+     end : joi.date().required(),
      image: joi.string().required(),
      artist: joi.string().required(),
      // date: joi.date().iso().required(),

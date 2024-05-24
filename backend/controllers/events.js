@@ -1,4 +1,4 @@
-// const eventsValidation=require("../validation/Events");
+const eventsValidation=require("../validation/Events");
 const eventSchema=require("../models/event");
 //createEvent getallevent getonevent delete put
 
@@ -15,9 +15,9 @@ let getAllEvents=async(req,res)=>{
     
 }
 let getOneeEvent=async(req,res)=>{
-    let eventId =req.params.eventId
+    let eventId =req.params.id
     try{
-        let event=await eventSchema.findById(eventId);
+        let event= await eventSchema.findById(eventId);
         res.status(200).json(event);
 
     }
@@ -28,23 +28,25 @@ let getOneeEvent=async(req,res)=>{
 }
 
 
-let createEvent=async (req,res)=>{
-    //validation part 
-    // let {error,value } = eventsValidation.validate(req.body);
-    // if (error){
-    //     return res.status(400).json({message : error.details[0].message})
-    // }
-    //adding event
+const createEvent = async (req,res)=>{
+    // verify that data passes through
+    // validation
+    console.log(req.body)
+    let {error,value } = eventsValidation.validate(req.body);
+    if (error){
+        return res.status(400).json({message : error.details[0].message})
+    }
     try{
-        let newevent = await eventSchema.create(req.body)
-        res.status(201).json(newevent)
+        let newBlog = await eventSchema.create(req.body)
+        res.status(201).json(newBlog)
 
     }catch(e){
         console.log(e)
-        res.status(500).json({message:"error while creating new event"})
+        res.status(500).json({message:"error while creating event"})
     }
     
 }
+
 let deleteEvent = async (req,res)=>{
     let eventId =req.params.id
     try{
@@ -57,10 +59,10 @@ let deleteEvent = async (req,res)=>{
 }
 let updateEvent= async (req,res) => {
     const eventId =req.params.id;
-    // let {error, value}= eventsValidation.validate(req.body)
-    // if (error){
-    // return res.status(400).json({message : error.details[0].message})
-    // }
+    let {error, value}= eventsValidation.validate(req.body)
+    if (error){
+    return res.status(400).json({message : error.details[0].message})
+    }
     try{
         let event= await eventSchema.findByIdAndUpdate(eventId,req.body,{new:true,old:false});
         res.status(200).json({message:"updated successfully, created event"+event})
