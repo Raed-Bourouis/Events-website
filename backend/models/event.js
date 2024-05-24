@@ -1,12 +1,20 @@
 const mongoose = require("mongoose")
 
 let eventSchema = mongoose.Schema({
-    title:{
+    eventTitle:{
         type:String,
+        required:true
+    },
+    description:{
+         type:String,
         required:true
     },
     artist:{
         type:String,
+        required:true
+    },
+    image:{
+        type:string,
         required:true
     },
     start:{
@@ -20,7 +28,23 @@ let eventSchema = mongoose.Schema({
     over:{
         type:Boolean,
         default: this.End<Date.now()
+    },
+   location : {
+       type:String,
+        required:true
+   },
+    
+    salle:{
+        type:String,
+        required:true
+    },
+     ticketsNumber:{ 
+        type:number,
+        required:true
     }
+    
+    
+    
 })
 
 module.exports= mongoose.model('event',eventSchema)
