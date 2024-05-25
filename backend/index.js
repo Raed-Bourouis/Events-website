@@ -55,3 +55,5 @@ connectDb = async () => {
     connectDb()
     console.log(`listening on port ${port} ! `);
   });
+
+module.exports=port
