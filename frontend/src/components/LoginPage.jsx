@@ -26,13 +26,14 @@ async function LoginLogic(mail, pass) {
   }
 }
 
-function Login() {
+function Login(clnm) {
   let [mail, setMail] = useState("");
   let [pass, setPass] = useState("");
+  clnm= JSON.stringify(clnm).slice(9,15) + " form-container"
 
   return (
     <>
-      <form method="post" id="login-form">
+      <form method="post" id="login-form" className={clnm}>
         <label htmlFor="login-email">Email:</label>
         <Input
           variant="soft"
@@ -69,12 +70,14 @@ function Login() {
   );
 }
 
-function SignUp() {
+function SignUp(clnm) {
   let [mail, setMail] = useState("");
   let [pass, setPass] = useState("");
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [phone, setPhone] = useState("");
+  clnm= JSON.stringify(clnm).slice(9,15) + " form-container"
+
 
   async function SignUpLogic(firstName, lastName, phone, mail, pass) {
     let newUser = {
@@ -106,7 +109,7 @@ function SignUp() {
 
   return (
     <>
-      <form method="post" id="sign-form">
+      <form method="post" id="sign-form" className={clnm}>
         <label htmlFor="sign-fn">First Name:</label>
         <Input
           variant="soft"
@@ -185,32 +188,45 @@ function SignUp() {
   );
 }
 
+function SwitcherText(){
+
+  return(
+    0
+  )
+}
+
 function Switcher() {
   let [visible, setVisible] = useState(false);
+  let isActive = visible ? "active":"hidden" 
+  let isHidden = visible ? "hidden":"active" 
+
   return (
-    <div>
-      <Button
+    <div className="switcher">
+      <Button style={{height:"2.25rem"}}
         onClick={() => {
           setVisible(!visible);
         }}
       >
         Click Me
       </Button>
-      {visible ? <Login /> : <SignUp />}
+      
+      <Divider style={{height:"100"}} orientation="vertical" />
+
+      {visible ? <Login clnm={isActive} /> : <SignUp clnm={isHidden} />}
     </div>
   );
 }
 
 function LoginPage() {
   return (
-    <div style={{ display: "flex", flexDirection: "row", gap: "25px" }}>
+    <div className="container">
       <ToastContainer />
       <Switcher />
 
       {/* <div style={{ "width": "40vw" }}>
         <Login />
       </div>
-      <Divider orientation="vertical" />
+      
       <div style={{ "width": "40vw" }}>
         <SignUp />
       </div> */}
