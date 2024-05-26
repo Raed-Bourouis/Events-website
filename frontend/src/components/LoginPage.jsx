@@ -5,7 +5,7 @@ import Input from "@mui/joy/Input";
 import Divider from "@mui/joy/Divider";
 import Button from "@mui/joy/Button";
 import { useState, useEffect } from "react";
-import "../style/Login.css";
+// import "../style/Login.css";
 
 async function LoginLogic(mail, pass) {
   let res = await fetch(`http://localhost:8000/users/`, { method: "GET" });

@@ -1,16 +1,14 @@
-import LoginPage from "./components/LoginPage"
-
-import './App.css'
-
+import LoginPage from "./components/LoginPage";
+import EventsList from "./components/EventsList";
+import "./App.css";
 
 function App() {
   return (
-    <LoginPage/> 
-
-  )
-
+    <div>
+      {/* <LoginPage /> */}
+      <EventsList />
+    </div>
+  );
 }
 
-
-
-export default App
+export default App;
