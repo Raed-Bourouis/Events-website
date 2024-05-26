@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-
-function CreateEvent({setLoading}) {
+function CreateEvent({ setLoading }) {
   let [eventTitle, setTitle] = useState("");
   let [artist, setArtist] = useState("");
   let [image, setImage] = useState("");
@@ -55,81 +55,82 @@ function CreateEvent({setLoading}) {
 
   return (
     <form>
-
-        <div className="info">
-          <label>
-            Event Title:
-            <input
-              type="text"
-              value={eventTitle}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </label>
-          <label>
-            Artist:
-            <input
-              type="text"
-              value={artist}
-              onChange={(e) => setArtist(e.target.value)}
-            />
-          </label>
-          <label>
-            Image URL:
-            <input
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-          </label>
-          <label>
-            Description:
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </label>
-          <label>
-            Start Date:
-            <input
-              type="datetime-local"
-              value={start}
-              onChange={(e) => setStart(e.target.value)}
-            />
-          </label>
-          <label>
-            End Date:
-            <input
-              type="datetime-local"
-              value={end}
-              onChange={(e) => setEnd(e.target.value)}
-            />
-          </label>
-          <label>
-            Location:
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </label>
-          <label>
-            Salle:
-            <input
-              type="text"
-              value={salle}
-              onChange={(e) => setSalle(e.target.value)}
-            />
-          </label>
-          <label>
-            Number of Tickets:
-            <input
-              type="number"
-              value={ticketsNumber}
-              onChange={(e) => setTicket(e.target.value)}
-            />
-          </label>
-          <button onClick={addEvent} type="submit">Add Event</button>
-        </div>
+      <div className="info">
+        <label>
+          Event Title:
+          <input
+            type="text"
+            value={eventTitle}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+        <label>
+          Artist:
+          <input
+            type="text"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
+        </label>
+        <label>
+          Image URL:
+          <input
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <label>
+          Start Date:
+          <input
+            type="datetime-local"
+            value={start}
+            onChange={(e) => setStart(e.target.value)}
+          />
+        </label>
+        <label>
+          End Date:
+          <input
+            type="datetime-local"
+            value={end}
+            onChange={(e) => setEnd(e.target.value)}
+          />
+        </label>
+        <label>
+          Location:
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </label>
+        <label>
+          Salle:
+          <input
+            type="text"
+            value={salle}
+            onChange={(e) => setSalle(e.target.value)}
+          />
+        </label>
+        <label>
+          Number of Tickets:
+          <input
+            type="number"
+            value={ticketsNumber}
+            onChange={(e) => setTicket(e.target.value)}
+          />
+        </label>
+        <button onClick={addEvent} type="submit">
+          Add Event
+        </button>
+      </div>
     </form>
   );
 }
@@ -159,7 +160,6 @@ export default function EventsList() {
       let res = await awt.json();
       console.log(res);
       setEvents(res);
-      //   setEvents(events=>res)
     }
     if (loading) {
       fetchEvents();
@@ -208,7 +208,11 @@ export default function EventsList() {
                   <td>{event.location}</td>
                   <td>{event.salle}</td>
                   <td>{event.ticketsNumber}</td>
-                  <td></td>
+                  <td>
+                    <Link to={`events/edit/${event._id}`}>
+                      <button>Update</button>
+                    </Link>
+                  </td>
                   <td>
                     <button
                       onClick={() => deleteEvent(event._id)}
@@ -224,5 +228,3 @@ export default function EventsList() {
     </div>
   );
 }
-
-
