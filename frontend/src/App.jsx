@@ -1,14 +1,13 @@
 import LoginPage from "./components/LoginPage";
 import EventsList from "./components/EventsList";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      {/* <LoginPage /> */}
-      <EventsList />
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginPage />}></Route>
+      <Route path="/events" element={<EventsList />}></Route>
+    </Routes>
   );
 }
-
-export default App;
