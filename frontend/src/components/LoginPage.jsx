@@ -1,5 +1,6 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import Input from "@mui/joy/Input";
 import Divider from "@mui/joy/Divider";
 import Button from "@mui/joy/Button";
@@ -10,17 +11,17 @@ async function LoginLogic(mail, pass) {
   let res = await fetch(`http://localhost:8000/users/`, { method: "GET" });
   let data = await res.json();
   console.log(data);
-  let userAccess =0
+  let userAccess = 0;
   data.forEach((tempuser) => {
     if (tempuser.email == mail && tempuser.password == pass) {
       userAccess = tempuser.isAdmin ? 2 : 1;
     }
   });
   // console.log(userAccess)
-  if(!userAccess){
-    toast.error("no such user")
-  }
-  else{
+  if (!userAccess) {
+    toast.error("no such user");
+  } else {
+    toast.success("Login Success");
     //TODO
   }
 }
@@ -61,8 +62,7 @@ function Login() {
             LoginLogic(mail, pass);
           }}
         >
-          {" "}
-          Log In{" "}
+          Log In
         </Button>
       </form>
     </>
@@ -70,55 +70,116 @@ function Login() {
 }
 
 function SignUp() {
+  let [mail, setMail] = useState("");
+  let [pass, setPass] = useState("");
+  let [firstName, setFirstName] = useState("");
+  let [lastName, setLastName] = useState("");
+  let [phone, setPhone] = useState("");
+
+  async function SignUpLogic(firstName, lastName, phone, mail, pass) {
+    let newUser = {
+      name: firstName,
+      family_name: lastName,
+      phone: phone,
+      email: mail,
+      password: pass,
+    };
+    let awt = await fetch("http://localhost:8000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+    let res = await awt.json();
+    if (res.message) {
+      toast.error(res.message);
+    } else {
+      toast.success("Created a new user ");
+      setFirstName("");
+      setLastName("");
+      setPhone("");
+      setMail("");
+      setPass("");
+    }
+  }
+
   return (
     <>
       <form method="post" id="sign-form">
-        <label>First Name:</label>
+        <label htmlFor="sign-fn">First Name:</label>
         <Input
           variant="soft"
           color="primary"
-          id="login"
-          name="login-fn"
+          id="sign-fn"
+          name="sign-fn"
           type="text"
+          value={firstName}
           placeholder="John"
+          onChange={(e) => {
+            setFirstName(e.target.value);
+          }}
         />
-        <label>Last Name:</label>
+        <label htmlFor="sign-ln">Last Name:</label>
         <Input
           variant="soft"
           color="primary"
-          id="login"
-          name="login-ln"
+          id="sign-ln"
+          name="sign-ln"
           type="text"
+          value={lastName}
           placeholder="Doe"
+          onChange={(e) => {
+            setLastName(e.target.value);
+          }}
         />
-        <label>Phone:</label>
+        <label htmlFor="sign-phone">Phone:</label>
         <Input
           variant="soft"
           color="primary"
-          id="login"
-          name="login-fn"
+          id="sign-phone"
+          name="sign-phone"
           type="text"
+          value={phone}
           placeholder="99-999-999"
+          onChange={(e) => {
+            setPhone(e.target.value);
+          }}
         />
-        <label htmlFor="login-email">Email:</label>
+        <label htmlFor="sign-email">Email:</label>
         <Input
           variant="soft"
           color="primary"
-          id="login"
-          name="login-email"
+          id="sign-email"
+          value={mail}
+          name="sign-email"
           type="email"
           placeholder="John.Doe@email.com"
+          onChange={(e) => {
+            setMail(e.target.value);
+          }}
         />
-        <label htmlFor="login-email">Password:</label>
+        <label htmlFor="sign-password">Password:</label>
         <Input
           variant="soft"
           color="primary"
-          id="login"
-          name="login-password"
+          value={pass}
+          id="sign-password"
+          name="sign-password"
           type="password"
           placeholder="********"
+          onChange={(e) => {
+            setPass(e.target.value);
+          }}
         />
-        <Button onClick={() => {}}> Log In </Button>
+        <Button
+          onClick={() => {
+            SignUpLogic(firstName, lastName, phone, mail, pass);
+          }}
+        >
+          {" "}
+          Sign Up{" "}
+        </Button>
       </form>
     </>
   );
@@ -143,7 +204,7 @@ function Switcher() {
 function LoginPage() {
   return (
     <div style={{ display: "flex", flexDirection: "row", gap: "25px" }}>
-      <ToastContainer/>
+      <ToastContainer />
       <Switcher />
 
       {/* <div style={{ "width": "40vw" }}>
