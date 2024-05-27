@@ -1,7 +1,6 @@
 
-import { Link } from "react-router-dom";
 
-import "../style/Navbar.css";
+import "./Navbar.css";
 export default function Navbar(){
     return (
         <header>
@@ -25,8 +24,8 @@ export default function Navbar(){
             
             <input type ="text"placeholder="search event " className="search"></input>
             <div className="signing">
-                <Link to={"/signin"}><button className="button_sign">Sign-in</button></Link>
-                
+                <button className="button_sign">Sign-in</button>
+                <button className="button_sign">Sign-up</button>
                
             </div>
         

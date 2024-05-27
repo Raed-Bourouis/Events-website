@@ -1,9 +1,5 @@
 
-import '../style/FooterPart.css';
-
-import facebook from "../assets/fb.png"
-import instagram from "../assets/insta.png"
-
+import './FooterPart.css';
 
 export default function FooterPart(){
    
@@ -32,18 +28,19 @@ export default function FooterPart(){
         </div>
 
         
-{/* 
+
         <div className="footer-column footer-social-media">
-          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"> <img className='footerImage' src={facebook} /> </a>
-          <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><img className='footerImage' src={instagram} /></a>
-        </div> */}
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+          <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
+        </div>
 
       </div>
 
       <div className="footer-bottom">
         &copy; {new Date().getFullYear()} Your Company. All rights reserved.
       </div>
-      <br />
     </footer>
   );
 }

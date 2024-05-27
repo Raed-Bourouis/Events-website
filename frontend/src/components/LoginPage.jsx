@@ -1,11 +1,13 @@
 import { ToastContainer, toast } from "react-toastify";
+import Typography from "@mui/joy/Typography";
+
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "@mui/joy/Input";
 import Divider from "@mui/joy/Divider";
 import Button from "@mui/joy/Button";
 import { useState, useEffect } from "react";
-// import "../style/Login.css";
+import "../style/Login.css";
 
 async function LoginLogic(mail, pass) {
   let res = await fetch(`http://localhost:8000/users/`, { method: "GET" });
@@ -29,7 +31,7 @@ async function LoginLogic(mail, pass) {
 function Login(clnm) {
   let [mail, setMail] = useState("");
   let [pass, setPass] = useState("");
-  clnm= JSON.stringify(clnm).slice(9,15) + " form-container"
+  clnm = JSON.stringify(clnm).slice(9, 15) + " form-container";
 
   return (
     <>
@@ -76,8 +78,7 @@ function SignUp(clnm) {
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [phone, setPhone] = useState("");
-  clnm= JSON.stringify(clnm).slice(9,15) + " form-container"
-
+  clnm = JSON.stringify(clnm).slice(9, 15) + " form-container";
 
   async function SignUpLogic(firstName, lastName, phone, mail, pass) {
     let newUser = {
@@ -188,29 +189,29 @@ function SignUp(clnm) {
   );
 }
 
-function SwitcherText(){
-
-  return(
-    0
-  )
-}
-
 function Switcher() {
   let [visible, setVisible] = useState(false);
-  let isActive = visible ? "active":"hidden" 
-  let isHidden = visible ? "hidden":"active" 
+  let isActive = visible ? "active" : "hidden";
+  let isHidden = visible ? "hidden" : "active";
+  let btnval = visible ? "Register Now" : "Log-in Instead";
+  let typo=visible ? "Don't Have an Account?" : "Already a Member?";
 
   return (
     <div className="switcher">
-      <Button style={{height:"2.25rem"}}
-        onClick={() => {
-          setVisible(!visible);
-        }}
-      >
-        Click Me
-      </Button>
-      
-      <Divider style={{height:"100"}} orientation="vertical" />
+      <div id="LoginLeftContainer">
+        <Typography>{typo}</Typography>
+
+        <Button
+          style={{ height: "2.25rem" }}
+          onClick={() => {
+            setVisible(!visible);
+          }}
+        >
+          {btnval}
+        </Button>
+      </div>
+
+      <Divider style={{ height: "100" }} orientation="vertical" />
 
       {visible ? <Login clnm={isActive} /> : <SignUp clnm={isHidden} />}
     </div>
@@ -219,17 +220,19 @@ function Switcher() {
 
 function LoginPage() {
   return (
-    <div className="container">
-      <ToastContainer />
-      <Switcher />
+    <div id="body">
+      <div className="LoginContainer">
+        <ToastContainer />
+        <Switcher />
 
-      {/* <div style={{ "width": "40vw" }}>
+        {/* <div style={{ "width": "40vw" }}>
         <Login />
       </div>
       
       <div style={{ "width": "40vw" }}>
         <SignUp />
       </div> */}
+      </div>
     </div>
   );
 }
