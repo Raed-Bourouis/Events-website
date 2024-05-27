@@ -6,3 +6,4 @@ const commentValidation = joi.object({
         .max(100)
         .required()
 })
+module.exports = commentValidation;
