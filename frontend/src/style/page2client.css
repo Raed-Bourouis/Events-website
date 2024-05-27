@@ -1,5 +1,5 @@
 
-.events_container {
+.container_event {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -8,25 +8,17 @@
     background-color: #f9f9f9;
   }
   
-  .event {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
+
+
+
   
-  .event:hover {
-    transform: translateY(-5px);
-  }
-  
-  .event img {
-    max-width: 100%;
+  .img {
+    transform: translateY(25px);
+    width: 26vw ;
+    aspect-ratio: 16/9;
     height: auto;
     border-radius: 8px;
+    border: solid black 2px;
   }
   
   .event h2 {
@@ -69,4 +61,26 @@
     color: #fa3c3c;
     padding: 20px;
   }
+
+
+  .comment-section{
+    padding-left: 2vw;
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 10vw;
+      gap:10px;
+      padding-bottom: 1vh;
+      /* border: 2px solid black; */
+    }
+  }
+
+  .comment{
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 0.6vh;
+    padding-left: 0.5vw;
+    width: 25vw;
+  }
+
   

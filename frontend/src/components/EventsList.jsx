@@ -53,9 +53,11 @@ function CreateEvent({ setLoading }) {
       });
   }
 
+  let style={"display":"flex","flex-flow":"column wrap","justify-content":"center","align-items":"center","gap":"20px"}
+
   return (
     <form>
-      <div className="info">
+      <div style={style} className="info">
         <label>
           Event Title:
           <input

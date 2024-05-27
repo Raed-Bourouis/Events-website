@@ -2,13 +2,16 @@
 const mongoose = require("mongoose")
 
 let commentSchema = mongoose.Schema({
-    owner:{
+    ownerId:{
         type: mongoose.Types.ObjectId,
-        required:true
+        // required:true
     },
-    post:{
+    eventId:{ //eventId
         type:mongoose.Types.ObjectId,
-        required:true
+        // required:true
+
+        //comentaire ; nice event
+        //submit => {content ; nice event, ownerid: user signed in, eventid: params}
     },
     content:{
         type:String,
@@ -17,5 +20,4 @@ let commentSchema = mongoose.Schema({
 })
 
 module.exports= mongoose.model('comment',commentSchema)
-
 

@@ -1,46 +1,82 @@
-import {useEffect,useState} from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import Button from "@mui/joy/Button";
+export default function EventInfo() {
+  let idparams = useParams();
+  let eventId = idparams.id;
 
-export default function EventInfo( eventId){
-
-let [event,setEvent]=useState("");
-const[loading,setLoading]=useState(true);
-useEffect(()=>{
-    fetch(`http://localhost:8000/events/${eventId}`,{methode:"GET"})
-   .then(res=>res.json())
-   .then(data=>{
-      
+  let [event, setEvent] = useState({});
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    fetch(`http://localhost:8000/events/${eventId}`, { methode: "GET" })
+      .then((res) => res.json())
+      .then((data) => {
         setEvent(data);
-        setLoading(false);}
-    
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching the event data:", error);
+        setLoading(true);
+      });
+  }, [eventId]);
 
-   )
-   .catch(error => {
-    console.error('Error fetching the event data:', error);
-    setLoading(false);
-  });
-}, [eventId]);
-
-if (loading) {
-return <div>Loading...</div>;}
-if (!event) {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!event) {
     return <div>Error loading event data</div>;
   }
 
-return (
+  async function makeReservation() {
+    try {
+      console.log(eventId)
+      console.log(event)
+
+      let awt = await fetch("http://localhost:8000/events/" + eventId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          eventTitle: event.eventTitle,
+          artist: event.artist,
+          description: event.description,
+          location: event.location,
+          ticketsNumber: event.ticketsNumber - 1,
+          start: event.start,
+          end: event.end,
+          salle: event.salle,
+          image: event.image,
+        }),
+      });
+      let res = await awt.json();
+      console.log(res);
+    } catch (error) {
+      toast.error("womp womp!");
+      console.error(error);
+    }
+  }
+
+  return (
     <div className="container_event">
+      <ToastContainer/>
       <div>
-        <img src={event.image  } alt="Event" />
+        <img className="img" src={event.image} alt="Event" />
       </div>
       <div className="info">
-        <h2>{event.title}</h2><br/>
+        <h2>{event.eventTitle}</h2>
+        <br />
         <h3>{event.artist}</h3>
         <p>{event.description}</p>
-        <p>{new Date(event.start).toLocaleString()} - {new Date(event.end).toLocaleString()}</p>
+        <p>
+          {new Date(event.start).toLocaleString()} -{" "}
+          {new Date(event.end).toLocaleString()}
+        </p>
         <p>{event.location}</p>
         <p>{event.ticketsNumber} tickets available</p>
+        <Button onClick={makeReservation}>Reserve</Button>
       </div>
     </div>
-  )
+  );
 }
-     
-    

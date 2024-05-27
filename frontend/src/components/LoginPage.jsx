@@ -1,5 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import Typography from "@mui/joy/Typography";
+import { useRef } from "react";
 
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,29 +10,34 @@ import Button from "@mui/joy/Button";
 import { useState, useEffect } from "react";
 import "../style/Login.css";
 
-async function LoginLogic(mail, pass) {
-  let res = await fetch(`http://localhost:8000/users/`, { method: "GET" });
-  let data = await res.json();
-  console.log(data);
-  let userAccess = 0;
-  data.forEach((tempuser) => {
-    if (tempuser.email == mail && tempuser.password == pass) {
-      userAccess = tempuser.isAdmin ? 2 : 1;
-    }
-  });
-  // console.log(userAccess)
-  if (!userAccess) {
-    toast.error("no such user");
-  } else {
-    toast.success("Login Success");
-    //TODO
-  }
-}
 
 function Login(clnm) {
   let [mail, setMail] = useState("");
   let [pass, setPass] = useState("");
+  let [route, setRoute]=useState("")
+  const buttonRef = useRef(null);
   clnm = JSON.stringify(clnm).slice(9, 15) + " form-container";
+
+  async function LoginLogic(mail, pass) {
+    let res = await fetch(`http://localhost:8000/users/`, { method: "GET" });
+    let data = await res.json();
+    console.log(data);
+    let userAccess = 0;
+    data.forEach((tempuser) => {
+      if (tempuser.email == mail && tempuser.password == pass) {
+        userAccess = tempuser.isAdmin ? 2 : 1;
+      }
+    });
+    // console.log(userAccess)
+    if (!userAccess) {
+      toast.error("no such user");
+    } else {
+      toast.success("Login Success");
+      route=userAccess==2? setRoute("/events"):setRoute("/")
+      buttonRef.current.click()
+    }
+    
+  }
 
   return (
     <>
@@ -60,17 +66,22 @@ function Login(clnm) {
             setPass(e.target.value);
           }}
         />
+        
         <Button
           onClick={() => {
             LoginLogic(mail, pass);
+            LoginLogic(mail, pass)
           }}
         >
           Log In
         </Button>
+        <Link ref={buttonRef} to={route}></Link>
       </form>
     </>
   );
 }
+
+
 
 function SignUp(clnm) {
   let [mail, setMail] = useState("");

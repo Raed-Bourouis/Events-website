@@ -1,25 +1,37 @@
-import Navbar from "./Navbar";
-import FooterPart from "./FooterPart";
-import EventInfo from "./EventInfo";
-import EventsList from "./EventsList";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "../style/page2client.css";
-export default function PageEventClient() {
-  return (
-    <Router>
-      <div>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<EventsList />} />
-          <Route path="/event/:id" element={<EventInfoPage />} />
-        </Routes>
 
-        <FooterPart />
+
+import EventInfo from './EventInfo';
+import CommentSection from './CommentSection'; // Import the CommentSection component
+import { BrowserRouter as Router, Link, Route, Routes ,useParams} from 'react-router-dom';
+import '../style/page2client.css';
+
+export default function PageEventClient() {
+
+  function EventInfoPage() {
+    const {id} = useParams();
+    return (
+      <div>
+        <EventInfo  />
+        <CommentSection />
       </div>
-    </Router>
+    );
+  }
+  return (
+      <div>
+          
+          
+        <EventInfoPage/>
+        
+      </div>
   );
 }
-let EventInfoPage = (event) => {
-  const id = event.params;
-  return <EventInfo eventId={id} />;
-};
+
+// function EventInfoPage() {
+//     const {id } = useParams();
+//     return (
+//       <>
+//         <EventInfo eventId={id} />
+//         <CommentSection eventId={id}  />
+//       </>
+//     );
+//   }
