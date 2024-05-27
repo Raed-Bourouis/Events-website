@@ -1,5 +1,5 @@
 const commentValidation=require("../validation/comment");
-const commenttSchema=require("../models/user");
+const commentSchema=require("../models/comment");
 
 
 
@@ -30,7 +30,7 @@ let getOneComment=async(req,res)=>{
 
 let addComment=async (req,res)=>{
     //validation part 
-    let {error,value } = clientValidation.validate(req.body);
+    let {error,value } = commentValidation.validate(req.body);
     if (error){
         return res.status(400).json({message : error.details[0].message})
     }

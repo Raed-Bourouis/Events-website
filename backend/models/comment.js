@@ -4,11 +4,11 @@ const mongoose = require("mongoose")
 let commentSchema = mongoose.Schema({
     owner:{
         type: mongoose.Types.ObjectId,
-        required:true
+        // required:true
     },
     post:{
         type:mongoose.Types.ObjectId,
-        required:true
+        // required:true
     },
     content:{
         type:String,

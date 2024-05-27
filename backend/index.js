@@ -9,6 +9,8 @@ const cors = require("cors");
 //importing routers
 const eventRouter=require("./routers/Event")
 const clientRouter=require("./routers/Client")
+const commentRouter=require("./routers/comments")
+
 
 
 
@@ -19,6 +21,7 @@ app.use(morgan("dev"));
 app.use(cors("*"))
 app.use('/events',eventRouter)
 app.use('/users',clientRouter)
+app.use('/comment',commentRouter)
 
 //testing post --ignore this
 // let ev={
