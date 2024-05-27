@@ -84,7 +84,7 @@ export default function EventInfo() {
         }),
       });
       let res = await awt.json();
-      console.log(res);
+      toast.success("reservation Made")
     } catch (error) {
       toast.error("womp womp!");
       console.error(error);
