@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import Button from '@mui/joy/Button'
 import { Link } from "react-router-dom";
 
 export default function UsersList() {
@@ -85,6 +86,7 @@ export default function UsersList() {
               ))}
         </tbody>
       </table>
+      <Link to="/events"><Button>See Events</Button></Link>
     </div>
   );
 }

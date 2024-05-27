@@ -2,6 +2,7 @@ import LoginPage from "./components/LoginPage";
 import EventsList from "./components/EventsList";
 import HomePage from "./components/HomePage";
 import PageEventClient from "./components/page2client";
+import UpdateEvent from "./components/UpdateEvent";
 import { useSearchParams } from "react-router-dom";
 import FooterPart from "./components/FooterPart";
 import UsersList from "./components/UsersList";
@@ -41,6 +42,8 @@ export default function App() {
           <Route path={"/event/:id"} element={Routing}></Route>
           <Route path="/signin" element={<LoginPage />}></Route>
           <Route path="/events" element={<EventsList />}></Route>
+          <Route path="/events/edit/:id" element={<UpdateEvent />}></Route>
+
           <Route path="/users" element={<UsersList />}></Route>
         </Routes>
       </div>

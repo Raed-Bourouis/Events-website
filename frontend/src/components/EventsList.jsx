@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Button from "@mui/joy/Button";
 
 function CreateEvent({ setLoading }) {
   let [eventTitle, setTitle] = useState("");
@@ -211,7 +212,7 @@ export default function EventsList() {
                   <td>{event.salle}</td>
                   <td>{event.ticketsNumber}</td>
                   <td>
-                    <Link to={`events/edit/${event._id}`}>
+                    <Link to={`/edit/${event._id}`}>
                       <button>Update</button>
                     </Link>
                   </td>
@@ -227,6 +228,8 @@ export default function EventsList() {
               ))}
         </tbody>
       </table>
+      <Link to="/users"><Button>See Users</Button></Link>
+
     </div>
   );
 }
