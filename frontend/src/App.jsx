@@ -13,16 +13,21 @@ import { Routes, Route } from "react-router-dom";
 export default function App() {
   let [Routing, setRouting]=useState(<PageEventClient/>)
   const [searchParams] = useSearchParams();
+  let [refresh, setRefresh]=useState(false)
 
 
+  
 
   function ReRender(){
+
     let currentUserId = searchParams.has("userId") ? searchParams.get("userId") : "";
+    
   searchParams.has("userId")? setRouting(<PageEventClient/>): setRouting(<LoginPage/>)
-  // console.log(Routing)
+  console.log(Routing)
+  
   }
 
-  useEffect(()=>ReRender(),[])
+  useEffect(()=>ReRender(),[refresh])
 
   let currentUserId = searchParams.has("userId") ? searchParams.get("userId") : "";
   console.log(currentUserId)
@@ -33,8 +38,7 @@ export default function App() {
       <div id="middleContent">
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          <Route path={"/event/:id"+currentUserId} element={Routing}></Route>
-          {/* <Route path={"/event/:id?userId="+currentUserId} element={<PageEventClient />}></Route> */}
+          <Route path={"/event/:id"} element={Routing}></Route>
           <Route path="/signin" element={<LoginPage />}></Route>
           <Route path="/events" element={<EventsList />}></Route>
           <Route path="/users" element={<UsersList />}></Route>

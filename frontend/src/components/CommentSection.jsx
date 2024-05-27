@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
+
 
 export default function CommentSection() {
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState("");
+
 
   let idparams = useParams();
   let eventId = idparams.id;
@@ -62,12 +65,13 @@ export default function CommentSection() {
           </button>
         </form>
         <div className="comments-list">
-          {comments.map((comment) => (
-            <div key={comment._id} className="comment">
+          {comments.map((comment) => {
+            if(comment.eventId==eventId){
+            return(<div key={comment._id} className="comment">
               <p>{comment.content}</p>
  
-            </div>
-          ))}
+            </div>)}}
+          )}
         </div>
       </div>
     </div>

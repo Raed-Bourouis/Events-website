@@ -1,10 +1,17 @@
 import  { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/EventHomePage.css";
+import { useSearchParams } from "react-router-dom";
+
 
 export default function Event( eventId ) {
   const [event, setEvent] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [searchParams] = useSearchParams();
+  let currentUserId = searchParams.has("userId") ? searchParams.get("userId") : "";
+  let route = `/event/${eventId.eventId}?userId=${currentUserId}`
+
 
   useEffect(() => {
     console.log(eventId)
@@ -33,7 +40,7 @@ export default function Event( eventId ) {
         <h2>{event.eventTitle}</h2>
         <br />
         <h3>{event.artist}</h3>
-        <Link to={"/event/"+eventId.eventId}><button>Reserve</button></Link>
+        <Link to={route}><button>Reserve</button></Link>
       </div>
     </div>
   );
