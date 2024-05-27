@@ -6,7 +6,7 @@ const commentSchema=require("../models/comment");
 let getAllComments=async(req,res)=>{
     try{
         let comments=await commentSchema.find();
-        res.status(200).json(clients);
+        res.status(200).json(comments);
     }
     catch(e){
         console.log(e);
@@ -15,7 +15,7 @@ let getAllComments=async(req,res)=>{
     
 }
 let getOneComment=async(req,res)=>{
-    let commentId =req.params.post
+    let commentId =req.params.id
     try{
         let comment=await commentSchema.findById(commentId);
         res.status(200).json(comment);
@@ -56,7 +56,7 @@ let deleteComment = async (req,res)=>{
     }
 }
 let updateComment= async (req,res) => {
-    const commentId =req.params.post;
+    const commentId =req.params.id;
     let {error, value}= commentValidation.validate(req.body)
     if (error){
     return res.status(400).json({message : error.details[0].message})
