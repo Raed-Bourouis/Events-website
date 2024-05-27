@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "@mui/joy/Button";
+
 export default function EventInfo() {
   let idparams = useParams();
   let eventId = idparams.id;
-
+  const [searchParams] = useSearchParams();
   let [event, setEvent] = useState({});
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -29,9 +31,40 @@ export default function EventInfo() {
   }
 
   async function makeReservation() {
+    let currentUserId = searchParams.has("userId")
+      ? searchParams.get("userId")
+      : "";
+
     try {
-      console.log(eventId)
-      console.log(event)
+      console.log(eventId);
+      console.log(event);
+      let awtuser = await fetch(
+        "http://localhost:8000/users/" + currentUserId,
+        {
+          method: "GET",
+        }
+      );
+      let currentUser = await awtuser.json();
+
+      currentUser.reservations.push(eventId);
+
+      let awtmod = await fetch("http://localhost:8000/users/" + currentUserId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: currentUser.name,
+          family_name: currentUser.family_name,
+          email: currentUser.email,
+          password: currentUser.password,
+          phone: currentUser.phone,
+          isAdmin: currentUser.isAdmin,
+          reservations: currentUser.reservations,
+        }),
+      });
+      let updateduser = await awtmod.json();
+      console.log(updateduser);
 
       let awt = await fetch("http://localhost:8000/events/" + eventId, {
         method: "PUT",
@@ -60,7 +93,7 @@ export default function EventInfo() {
 
   return (
     <div className="container_event">
-      <ToastContainer/>
+      <ToastContainer />
       <div>
         <img className="img" src={event.image} alt="Event" />
       </div>

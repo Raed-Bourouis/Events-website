@@ -23,9 +23,11 @@ function Login(clnm) {
     let data = await res.json();
     console.log(data);
     let userAccess = 0;
+    let user={}
     data.forEach((tempuser) => {
       if (tempuser.email == mail && tempuser.password == pass) {
         userAccess = tempuser.isAdmin ? 2 : 1;
+        user=tempuser
       }
     });
     // console.log(userAccess)
@@ -33,7 +35,7 @@ function Login(clnm) {
       toast.error("no such user");
     } else {
       toast.success("Login Success");
-      route=userAccess==2? setRoute("/events"):setRoute("/")
+      route=userAccess==2? setRoute(`/events?userId=${user._id}`):setRoute(`/?userId=${user._id}`)
       buttonRef.current.click()
     }
     
