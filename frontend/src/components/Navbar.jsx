@@ -1,38 +1,39 @@
-
 import { Link } from "react-router-dom";
+import facebook from "../assets/fb.png";
+import instagram from "../assets/insta.png";
+import festival from "../assets/festival.png";
+import Input from "@mui/joy/Input"
+import Button from "@mui/joy/Button"
+
 
 import "../style/Navbar.css";
-export default function Navbar(){
-    return (
-        <header>
-            <img src="frontend\image\téléchargement.png" alt="error"/>
-        <div className="container">
-
-            <div className="social_media">
-                <button className="button">
-                    <img src=".\image\fb.png" alt="error"/> 
-                    <a href = "https://www.facebook.com/"></a> 
-                </button> 
-                <button className="button">
-                <img src="imge\instajpg" alt="error"/> 
-                    <a href = "https://www.facebook.com/"></a> 
-                </button>
-                <button className="button">
-                <img src="" alt="error"/> 
-                    <a href = "https://www.facebook.com/"></a> 
-                </button>
-            </div>
-            
-            <input type ="text"placeholder="search event " className="search"></input>
-            <div className="signing">
-                <Link to={"/signin"}><button className="button_sign">Sign-in</button></Link>
-                
-               
-            </div>
-        
-
-
+export default function Navbar() {
+  return (
+    <header>
+        <div className="social_media">
+          <button className="button">
+            <img src={facebook} className="socials" alt="error" />
+            <a href="https://www.facebook.com/"></a>
+          </button>
+          <button className="button">
+            <img src={instagram} className="socials" alt="error" />
+            <a href="https://www.facebook.com/"></a>
+          </button>
         </div>
-        </header>
-    );
+
+        <img id="Logo" src={festival} alt="error" />
+
+        <Input
+          type="text"
+          placeholder="search event "
+          className="search"
+        ></Input>
+        <div className="signing">
+          <Link to={"/signin"}>
+            <Button className="button_sign">Sign-in</Button>
+          </Link>
+        </div>
+      
+    </header>
+  );
 }
