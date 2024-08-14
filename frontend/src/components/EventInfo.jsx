@@ -11,7 +11,7 @@ export default function EventInfo() {
   let [event, setEvent] = useState({});
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:8000/events/${eventId}`, { methode: "GET" })
+    fetch(`http://localhost:8000/events/${eventId}`, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setEvent(data);
